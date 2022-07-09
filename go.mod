@@ -7,7 +7,7 @@ require (
 	github.com/Azure/go-autorest/autorest v0.11.19
 	github.com/Azure/go-autorest/autorest/adal v0.9.13
 	github.com/Pallinder/go-randomdata v1.2.0
-	github.com/argoproj/argo-cd/v2 v2.4.0
+	github.com/argoproj/argo-cd/v2 v2.4.1
 	github.com/argoproj/argo-workflows/v3 v3.3.5
 	github.com/argoproj/gitops-engine v0.7.0
 	github.com/aws/aws-sdk-go v1.42.50
