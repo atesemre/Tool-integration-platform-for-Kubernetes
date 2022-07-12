@@ -251,6 +251,8 @@ type AppStoreApplicationVersionResponse struct {
 	CreatedOn               time.Time `json:"createdOn"`
 	RawValues               string    `json:"rawValues"`
 	Readme                  string    `json:"readme"`
+	SchemaJson              string    `json:"schema_json"`
+	Notes                   string    `json:"notes"`
 	UpdatedOn               time.Time `json:"updatedOn"`
 	IsChartRepoActive       bool      `json:"isChartRepoActive"`
 }
@@ -260,9 +262,10 @@ type AppStoreVersionsResponse struct {
 	Id      int    `json:"id"`
 }
 
-type ReadmeRes struct {
+type ReadmeSchemaJsonRes struct {
 	AppStoreApplicationVersionId int    `json:"appStoreApplicationVersionId"`
 	Readme                       string `json:"readme"`
+	SchemaJson                   string `json:"schemaJson"`
 }
 
 type AppStoreWithVersion struct {
