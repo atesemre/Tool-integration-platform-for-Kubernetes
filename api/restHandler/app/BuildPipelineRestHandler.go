@@ -217,13 +217,19 @@ func (handler PipelineConfigRestHandlerImpl) UpdateBranchCiPipelinesWithRegex(w 
 	}
 	patchRequest.CiPipeline.CiMaterial = materialList
 
-	createResp, err := handler.pipelineBuilder.PatchRegexCiPipeline(&patchRequest)
+	_, err = handler.pipelineBuilder.PatchRegexCiPipeline(&patchRequest)
 	if err != nil {
 		handler.Logger.Errorw("service err, PatchCiPipelines", "err", err, "PatchCiPipelines", patchRequest)
 		common.WriteJsonResp(w, err, nil, http.StatusInternalServerError)
 		return
 	}
-	common.WriteJsonResp(w, err, createResp, http.StatusOK)
+	resp, err := handler.ciHandler.FetchMaterialsByPipelineId(patchRequest.CiPipeline.Id)
+	if err != nil {
+		handler.Logger.Errorw("service err, FetchMaterials", "err", err, "pipelineId", patchRequest.CiPipeline.Id)
+		common.WriteJsonResp(w, err, resp, http.StatusInternalServerError)
+		return
+	}
+	common.WriteJsonResp(w, err, resp, http.StatusOK)
 }
 
 func (handler PipelineConfigRestHandlerImpl) PatchCiPipelines(w http.ResponseWriter, r *http.Request) {
