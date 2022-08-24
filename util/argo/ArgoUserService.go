@@ -38,7 +38,7 @@ const (
 )
 
 type ArgoUserService interface {
-	GetLatestDevtronArgoCdUserToken() (string, error)
+	GetLatestDevtronArgoCdUserToken(headerToken string) (string, error)
 }
 type ArgoUserServiceImpl struct {
 	logger              *zap.SugaredLogger
@@ -182,7 +182,7 @@ func (impl *ArgoUserServiceImpl) createNewArgoCdTokenForDevtron(username, passwo
 	}
 	return token, nil
 }
-func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken() (string, error) {
+func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken(headerToken string) (string, error) {
 	isGitOpsConfigured := false
 	gitOpsConfig, err := impl.gitOpsRepository.GetGitOpsConfigActive()
 	if err != nil && err != pg.ErrNoRows {
@@ -194,7 +194,7 @@ func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken() (string, erro
 	}
 	if !isGitOpsConfigured {
 		//TODO FIX
-		return "Use Header Token", nil
+		return headerToken, nil
 	}
 
 	cluster, err := impl.clusterService.FindOne(cluster.DefaultClusterName)

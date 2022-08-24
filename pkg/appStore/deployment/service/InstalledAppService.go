@@ -421,7 +421,7 @@ func (impl InstalledAppServiceImpl) performDeployStageOnAcd(installedAppVersion 
 }
 func (impl InstalledAppServiceImpl) performDeployStage(installedAppVersionId int, userId int32) (*appStoreBean.InstallAppVersionDTO, error) {
 	ctx := context.Background()
-	acdToken, err := impl.argoUserService.GetLatestDevtronArgoCdUserToken()
+	acdToken, err := impl.argoUserService.GetLatestDevtronArgoCdUserToken("EMPTY-TOKEN")
 	if err != nil {
 		impl.logger.Errorw("error in getting acd token", "err", err)
 		return nil, err

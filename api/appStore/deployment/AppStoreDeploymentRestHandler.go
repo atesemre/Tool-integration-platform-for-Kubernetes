@@ -145,7 +145,7 @@ func (handler AppStoreDeploymentRestHandlerImpl) InstallApp(w http.ResponseWrite
 	if util2.GetDevtronVersion().ServerMode == util2.SERVER_MODE_HYPERION || request.AppOfferingMode == util2.SERVER_MODE_HYPERION {
 		ctx = context.WithValue(r.Context(), "token", token)
 	} else {
-		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken()
+		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken(token)
 		if err != nil {
 			handler.Logger.Errorw("error in getting acd token", "err", err)
 			common.WriteJsonResp(w, err, nil, http.StatusInternalServerError)
@@ -281,7 +281,7 @@ func (handler AppStoreDeploymentRestHandlerImpl) DeleteInstalledApp(w http.Respo
 	if util2.GetDevtronVersion().ServerMode == util2.SERVER_MODE_HYPERION || request.AppOfferingMode == util2.SERVER_MODE_HYPERION {
 		ctx = context.WithValue(r.Context(), "token", token)
 	} else {
-		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken()
+		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken(token)
 		if err != nil {
 			handler.Logger.Errorw("error in getting acd token", "err", err)
 			common.WriteJsonResp(w, err, nil, http.StatusInternalServerError)
@@ -396,7 +396,7 @@ func (handler AppStoreDeploymentRestHandlerImpl) UpdateInstalledApp(w http.Respo
 	if util2.GetDevtronVersion().ServerMode == util2.SERVER_MODE_HYPERION || request.AppOfferingMode == util2.SERVER_MODE_HYPERION {
 		ctx = context.WithValue(r.Context(), "token", token)
 	} else {
-		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken()
+		acdToken, err := handler.argoUserService.GetLatestDevtronArgoCdUserToken(token)
 		if err != nil {
 			handler.Logger.Errorw("error in getting acd token", "err", err)
 			common.WriteJsonResp(w, err, nil, http.StatusInternalServerError)
