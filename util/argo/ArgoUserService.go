@@ -93,7 +93,7 @@ func (impl *ArgoUserServiceImpl) updateArgoCdUserDetail() {
 		isGitOpsConfigured = true
 	}
 	if !isGitOpsConfigured {
-		//TODO FIX
+		//TODO FIX - CHECK INTEGRATION AVAILABLE OR NOT
 		return
 	}
 
@@ -193,7 +193,7 @@ func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken(headerToken str
 		isGitOpsConfigured = true
 	}
 	if !isGitOpsConfigured {
-		//TODO FIX
+		//TODO FIX - CHECK INTEGRATION AVAILABLE OR NOT
 		return headerToken, nil
 	}
 
