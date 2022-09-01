@@ -182,6 +182,8 @@ func (impl *ArgoUserServiceImpl) createNewArgoCdTokenForDevtron(username, passwo
 	}
 	return token, nil
 }
+
+//note: this function also called for no gitops case, where apps are installed via helm
 func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken(headerToken string) (string, error) {
 	isGitOpsConfigured := false
 	gitOpsConfig, err := impl.gitOpsRepository.GetGitOpsConfigActive()
@@ -194,6 +196,9 @@ func (impl *ArgoUserServiceImpl) GetLatestDevtronArgoCdUserToken(headerToken str
 	}
 	if !isGitOpsConfigured {
 		//TODO FIX - CHECK INTEGRATION AVAILABLE OR NOT
+		if headerToken == "EMPTY-TOKEN" {
+			return "", fmt.Errorf("no token provided for deployment")
+		}
 		return headerToken, nil
 	}
 
